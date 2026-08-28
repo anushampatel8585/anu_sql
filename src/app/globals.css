@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sql-accent: #4F46E5;
+  --sql-accent-light: #818CF8;
+  --sql-dark: #0F1419;
+  --sql-darker: #0A0D12;
+  --sql-surface: #151B23;
+  --sql-surface-light: #1C2333;
+  --sql-border: #252D3A;
+  --sql-border-light: #2E3A4D;
+  --sql-text: #E6EDF3;
+  --sql-text-muted: #8B949E;
+  --sql-text-subtle: #6E7681;
+  --sql-glow: rgba(79, 70, 229, 0.15);
+  --sql-glow-strong: rgba(79, 70, 229, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--sql-darker);
+  --color-foreground: var(--sql-text);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sql-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sql-border);
+  border-radius: 3px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--sql-darker);
+  color: var(--sql-text);
+}
+
+@keyframes sql-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.sql-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.08), transparent);
+  background-size: 200% 100%;
+  animation: sql-shimmer 3s ease-in-out infinite;
+}
+
+.sql-card {
+  background: var(--sql-surface);
+  border: 1px solid var(--sql-border);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sql-card:hover {
+  border-color: var(--sql-accent);
+  box-shadow: 0 0 0 1px var(--sql-accent), 0 8px 32px var(--sql-glow), 0 0 64px var(--sql-glow);
+  transform: translateY(-2px);
+}
+
+.sql-grid-bg {
+  background-image: 
+    linear-gradient(rgba(79, 70, 229, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
